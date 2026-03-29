@@ -3,10 +3,12 @@
 <head>
 <meta charset="UTF-8">
 <title>Carta Cumpleaños</title>
+
 <style>
 body {
     margin: 0;
     height: 100vh;
+    overflow: hidden;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -22,7 +24,6 @@ body {
     position: relative;
     cursor: pointer;
     border-radius: 10px;
-    transition: 1s;
 }
 
 .flap {
@@ -42,7 +43,7 @@ body {
 .card {
     position: absolute;
     width: 280px;
-    height: 350px;
+    height: 360px;
     background: white;
     top: -400px;
     left: 10px;
@@ -57,12 +58,23 @@ body {
     top: -180px;
 }
 
+h2 {
+    color: #ff4da6;
+}
+
+/* TEXTO ANIMADO */
+#mensaje {
+    font-size: 16px;
+    color: #444;
+    min-height: 60px;
+}
+
 /* PASTEL */
 .cake {
     position: relative;
     width: 150px;
     height: 120px;
-    margin: 20px auto;
+    margin: 15px auto;
 }
 
 .layer {
@@ -124,8 +136,20 @@ body {
     to { transform: scale(1.3); }
 }
 
-h2 {
-    color: #ff4da6;
+/* CONFETI */
+.confetti {
+    position: fixed;
+    width: 8px;
+    height: 8px;
+    background: red;
+    top: -10px;
+    animation: caer linear forwards;
+}
+
+@keyframes caer {
+    to {
+        transform: translateY(100vh) rotate(720deg);
+    }
 }
 </style>
 </head>
@@ -152,11 +176,39 @@ h2 {
             <div class="candle"><div class="flame"></div></div>
         </div>
 
-        <p>Que tu día esté lleno de magia, amor y sonrisas 💖✨</p>
+        <p id="mensaje"></p>
     </div>
 </div>
 
 <script>
+let texto = "Que este día esté lleno de amor, alegría y momentos inolvidables 💖✨";
+let i = 0;
+
+function escribirTexto() {
+    if (i < texto.length) {
+        document.getElementById("mensaje").innerHTML += texto.charAt(i);
+        i++;
+        setTimeout(escribirTexto, 40);
+    }
+}
+
+function lanzarConfeti() {
+    for (let i = 0; i < 80; i++) {
+        let confeti = document.createElement("div");
+        confeti.classList.add("confetti");
+
+        confeti.style.left = Math.random() * 100 + "vw";
+        confeti.style.backgroundColor = 
+            `hsl(${Math.random()*360}, 100%, 50%)`;
+
+        confeti.style.animationDuration = (Math.random() * 3 + 2) + "s";
+
+        document.body.appendChild(confeti);
+
+        setTimeout(() => confeti.remove(), 5000);
+    }
+}
+
 function abrirCarta(elemento) {
     elemento.classList.toggle("open");
 
@@ -166,6 +218,9 @@ function abrirCarta(elemento) {
             flama.classList.add("encendida");
         }, i * 400);
     });
+
+    escribirTexto();
+    lanzarConfeti();
 }
 </script>
 
