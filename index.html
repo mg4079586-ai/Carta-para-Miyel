@@ -2,110 +2,172 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<title>Carta de Cumpleaños</title>
+<title>Carta Cumpleaños</title>
 <style>
-    body {
-        background: #ffe6f0;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 100vh;
-        font-family: 'Arial', sans-serif;
-    }
+body {
+    margin: 0;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(135deg, #ffd6e7, #ffe9f5);
+    font-family: 'Segoe UI', sans-serif;
+}
 
-    .card {
-        background: white;
-        padding: 30px;
-        border-radius: 20px;
-        text-align: center;
-        box-shadow: 0 10px 25px rgba(0,0,0,0.2);
-        animation: abrir 1.5s ease;
-    }
+/* SOBRE */
+.envelope {
+    width: 300px;
+    height: 200px;
+    background: #ff99cc;
+    position: relative;
+    cursor: pointer;
+    border-radius: 10px;
+    transition: 1s;
+}
 
-    @keyframes abrir {
-        from { transform: scale(0); opacity: 0; }
-        to { transform: scale(1); opacity: 1; }
-    }
+.flap {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: #ff66b2;
+    clip-path: polygon(0 0, 100% 0, 50% 50%);
+    transition: 1s;
+}
 
-    h1 {
-        color: #ff4da6;
-    }
+.open .flap {
+    transform: rotateX(180deg);
+}
 
-    .cake {
-        position: relative;
-        margin: 30px auto;
-        width: 150px;
-        height: 100px;
-        background: #ff99cc;
-        border-radius: 10px;
-    }
+/* CARTA */
+.card {
+    position: absolute;
+    width: 280px;
+    height: 350px;
+    background: white;
+    top: -400px;
+    left: 10px;
+    border-radius: 20px;
+    text-align: center;
+    padding: 20px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+    transition: 1s;
+}
 
-    .candle {
-        position: absolute;
-        top: -30px;
-        width: 10px;
-        height: 30px;
-        background: #fff;
-        border-radius: 3px;
-    }
+.open .card {
+    top: -180px;
+}
 
-    .candle:nth-child(1) { left: 20px; }
-    .candle:nth-child(2) { left: 50px; }
-    .candle:nth-child(3) { left: 80px; }
-    .candle:nth-child(4) { left: 110px; }
+/* PASTEL */
+.cake {
+    position: relative;
+    width: 150px;
+    height: 120px;
+    margin: 20px auto;
+}
 
-    .flame {
-        width: 10px;
-        height: 15px;
-        background: orange;
-        border-radius: 50%;
-        position: absolute;
-        top: -15px;
-        left: 0;
-        opacity: 0;
-    }
+.layer {
+    position: absolute;
+    width: 150px;
+    height: 40px;
+    background: #ff85c1;
+    border-radius: 10px;
+}
 
-    .encendida {
-        opacity: 1;
-        animation: parpadeo 0.5s infinite alternate;
-    }
+.layer:nth-child(1) { bottom: 0; }
+.layer:nth-child(2) { bottom: 35px; background: #ffaad4; }
+.layer:nth-child(3) { bottom: 70px; background: #ffc2e0; }
 
-    @keyframes parpadeo {
-        from { transform: scale(1); }
-        to { transform: scale(1.2); }
-    }
+/* DECORACION */
+.drip {
+    position: absolute;
+    width: 20px;
+    height: 25px;
+    background: white;
+    border-radius: 50%;
+    top: 0;
+}
 
-    p {
-        font-size: 18px;
-        color: #333;
-    }
+.drip:nth-child(4) { left: 20px; }
+.drip:nth-child(5) { left: 60px; }
+.drip:nth-child(6) { left: 100px; }
+
+/* VELAS */
+.candle {
+    position: absolute;
+    width: 10px;
+    height: 30px;
+    background: #fff;
+    top: -30px;
+}
+
+.candle:nth-child(7) { left: 30px; }
+.candle:nth-child(8) { left: 70px; }
+.candle:nth-child(9) { left: 110px; }
+
+.flame {
+    width: 10px;
+    height: 15px;
+    background: orange;
+    border-radius: 50%;
+    position: absolute;
+    top: -15px;
+    opacity: 0;
+}
+
+.encendida {
+    opacity: 1;
+    animation: flame 0.5s infinite alternate;
+}
+
+@keyframes flame {
+    from { transform: scale(1); }
+    to { transform: scale(1.3); }
+}
+
+h2 {
+    color: #ff4da6;
+}
 </style>
 </head>
+
 <body>
 
-<div class="card">
-    <h1>🎉 Feliz cumpleaños Miyelito 🎉</h1>
+<div class="envelope" onclick="abrirCarta(this)">
+    <div class="flap"></div>
 
-    <div class="cake">
-        <div class="candle"><div class="flame"></div></div>
-        <div class="candle"><div class="flame"></div></div>
-        <div class="candle"><div class="flame"></div></div>
-        <div class="candle"><div class="flame"></div></div>
+    <div class="card">
+        <h2>🎉 Feliz cumpleaños Miyelito 🎉</h2>
+
+        <div class="cake">
+            <div class="layer"></div>
+            <div class="layer"></div>
+            <div class="layer"></div>
+
+            <div class="drip"></div>
+            <div class="drip"></div>
+            <div class="drip"></div>
+
+            <div class="candle"><div class="flame"></div></div>
+            <div class="candle"><div class="flame"></div></div>
+            <div class="candle"><div class="flame"></div></div>
+        </div>
+
+        <p>Que tu día esté lleno de magia, amor y sonrisas 💖✨</p>
     </div>
-
-    <p>Que este día esté lleno de alegría, amor y momentos inolvidables 💖</p>
 </div>
 
 <script>
-    window.onload = function() {
-        let llamas = document.querySelectorAll('.flame');
-        llamas.forEach((flama, i) => {
-            setTimeout(() => {
-                flama.classList.add('encendida');
-            }, i * 500);
-        });
-    }
+function abrirCarta(elemento) {
+    elemento.classList.toggle("open");
+
+    let llamas = document.querySelectorAll(".flame");
+    llamas.forEach((flama, i) => {
+        setTimeout(() => {
+            flama.classList.add("encendida");
+        }, i * 400);
+    });
+}
 </script>
 
 </body>
-  </html>
+</html>
