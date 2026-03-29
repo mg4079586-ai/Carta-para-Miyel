@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Carta de Cumpleaños</title>
+<style>
+    body {
+        background: #ffe6f0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        font-family: 'Arial', sans-serif;
+    }
+
+    .card {
+        background: white;
+        padding: 30px;
+        border-radius: 20px;
+        text-align: center;
+        box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+        animation: abrir 1.5s ease;
+    }
+
+    @keyframes abrir {
+        from { transform: scale(0); opacity: 0; }
+        to { transform: scale(1); opacity: 1; }
+    }
+
+    h1 {
+        color: #ff4da6;
+    }
+
+    .cake {
+        position: relative;
+        margin: 30px auto;
+        width: 150px;
+        height: 100px;
+        background: #ff99cc;
+        border-radius: 10px;
+    }
+
+    .candle {
+        position: absolute;
+        top: -30px;
+        width: 10px;
+        height: 30px;
+        background: #fff;
+        border-radius: 3px;
+    }
+
+    .candle:nth-child(1) { left: 20px; }
+    .candle:nth-child(2) { left: 50px; }
+    .candle:nth-child(3) { left: 80px; }
+    .candle:nth-child(4) { left: 110px; }
+
+    .flame {
+        width: 10px;
+        height: 15px;
+        background: orange;
+        border-radius: 50%;
+        position: absolute;
+        top: -15px;
+        left: 0;
+        opacity: 0;
+    }
+
+    .encendida {
+        opacity: 1;
+        animation: parpadeo 0.5s infinite alternate;
+    }
+
+    @keyframes parpadeo {
+        from { transform: scale(1); }
+        to { transform: scale(1.2); }
+    }
+
+    p {
+        font-size: 18px;
+        color: #333;
+    }
+</style>
+</head>
+<body>
+
+<div class="card">
+    <h1>🎉 Feliz cumpleaños Miyelito 🎉</h1>
+
+    <div class="cake">
+        <div class="candle"><div class="flame"></div></div>
+        <div class="candle"><div class="flame"></div></div>
+        <div class="candle"><div class="flame"></div></div>
+        <div class="candle"><div class="flame"></div></div>
+    </div>
+
+    <p>Que este día esté lleno de alegría, amor y momentos inolvidables 💖</p>
+</div>
+
+<script>
+    window.onload = function() {
+        let llamas = document.querySelectorAll('.flame');
+        llamas.forEach((flama, i) => {
+            setTimeout(() => {
+                flama.classList.add('encendida');
+            }, i * 500);
+        });
+    }
+</script>
+
+</body>
+  </html>
